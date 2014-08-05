@@ -13,13 +13,18 @@ fi
 # Customize to your needs...
 
 # .zshrc
-# Load tmux
+
+# Load tmux.
+# This one still lets you detach to normal terminal while the prezto module wont
 if [ "$TMUX" = "" ]; then tmux; fi
+  
+# rbenv
+eval "$(rbenv init -)"
 
 # load prompt theme
 autoload -U promptinit && promptinit
 prompt tgrrtt
- 
+
 # aliasing
 alias auxg="ps aux | grep -i"
 alias gcam="git commit -a -m"
@@ -35,5 +40,9 @@ alias lsla="ls -la"
 alias gst="git status"
 alias glogger="watch -n4 -t git log --graph --oneline --decorate=full --abbrev-commit --date=relative"
 
-# export
-export PATH=$PATH:./node_modules/.bin
+# exports
+
+# virtualenv
+# Disable virtualenv prompt info
+export VIRTUAL_ENV_DISABLE_PROMPT='1'
+source /Users/tyler/.virtualenvs/default/bin/activate
