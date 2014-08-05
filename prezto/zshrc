@@ -1,0 +1,39 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+# .zshrc
+# Load tmux
+if [ "$TMUX" = "" ]; then tmux; fi
+
+# load prompt theme
+autoload -U promptinit && promptinit
+prompt tgrrtt
+ 
+# aliasing
+alias auxg="ps aux | grep -i"
+alias gcam="git commit -a -m"
+alias sbl="subl ."
+alias gmnoff="git merge --no-ff"
+alias pipes="pipes.sh -p 3 -r 5000 -R -s 15"
+alias rmdir="rm -rf"
+alias rmrf="rm -rf"
+alias tmuxkst="tmux kill-session -t"
+alias chrome="open -a Google\ Chrome"
+alias lsa="ls -a"
+alias lsla="ls -la"
+alias gst="git status"
+alias glogger="watch -n4 -t git log --graph --oneline --decorate=full --abbrev-commit --date=relative"
+
+# export
+export PATH=$PATH:./node_modules/.bin
