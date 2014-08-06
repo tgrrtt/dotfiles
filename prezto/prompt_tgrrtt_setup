@@ -1,6 +1,6 @@
 #
-# A monochrome theme that displays basic information. 
-# A One Liner: Folder on the left. Git on the Right.
+# A one-liner theme that displays quick cwd info on the left, and vcs info on the right.
+#
 # Authors:
 #   Brian Tse <briankftse@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -42,8 +42,8 @@ function prompt_tgrrtt_setup {
   zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b|%F{cyan}%r%f'
   zstyle ':vcs_info:git*+set-message:*' hooks git-status
 
-  # Define prompts.
-  PROMPT='%2~ ❯ '
+  # Define prompts.  %2~ ❯
+  PROMPT='%2~ %(?.%F{magenta}.%F{red})❯%f '
   RPROMPT='${vcs_info_msg_0_}'
 }
 
