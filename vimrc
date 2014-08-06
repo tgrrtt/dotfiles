@@ -12,6 +12,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'elzr/vim-json'
 Plugin 'Townk/vim-autoclose'
+Plugin 'kien/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -123,8 +124,11 @@ set encoding=utf-8
 set autoread
 
 " open NerdTree if blank window
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Map Nerd tree to ctrl-n
 map <C-n> :NERDTreeToggle<CR>
+
+" Ignore for ctrlp
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
