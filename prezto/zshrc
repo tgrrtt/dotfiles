@@ -13,17 +13,15 @@ fi
 # Customize to your needs...
 
 # .zshrc
-
-# Load tmux.
-# This one still lets you detach to normal terminal while the prezto module wont
-#if [ "$TMUX" = "" ]; then tmux; fi
   
 # rbenv
 eval "$(rbenv init -)"
 
-# load prompt theme
-#autoload -U promptinit && promptinit
-#prompt tgrrtt
+# options
+# Enable > into an existing file
+setopt CLOBBER
+# Turn off nyae correction
+unsetopt CORRECT
 
 # aliasing
 alias auxg="ps aux | grep -i"
@@ -47,4 +45,5 @@ export PATH=./node_modules/.bin:/usr/local/bin:$PATH
 # virtualenv
 # Disable virtualenv prompt info
 export VIRTUAL_ENV_DISABLE_PROMPT='1'
+# activate 'default' virtualenv
 source /Users/tyler/.virtualenvs/default/bin/activate
