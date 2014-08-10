@@ -28,7 +28,6 @@ alias auxg="ps aux | grep -i"
 alias gcam="git commit -a -m"
 alias sbl="subl ."
 alias gmnoff="git merge --no-ff"
-alias pipes="pipes.sh -p 3 -r 5000 -R -s 15"
 alias rmdir="rm -rf"
 alias rmrf="rm -rf"
 alias kst="kill-session -t"
@@ -36,11 +35,11 @@ alias chrome="open -a Google\ Chrome"
 alias lsa="ls -a"
 alias lsla="ls -la"
 alias gst="git status"
-alias glogger="watch -n4 -t git log --graph --oneline --decorate=full --abbrev-commit --date=relative"
+alias glog="git hist"
+alias glogger="while true; do clear; git hist -5 | cat; sleep 2; done"
 
 # export
 export PATH=./node_modules/.bin:/usr/local/bin:$PATH
-
 
 # virtualenv
 # Disable virtualenv prompt info

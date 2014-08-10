@@ -16,7 +16,6 @@
 
 # Print a random, hopefully interesting, adage.
 if (( $+commands[fortune] )); then
-  fortune -a
+  fortune -a -s | cowsay -f tux | lolcat
   print
 fi
-

@@ -13,6 +13,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'elzr/vim-json'
 Plugin 'Townk/vim-autoclose'
 Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'kshenoy/vim-signature'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -28,6 +30,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" disable autocomment insertion
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " switch syntax highlighting on, when the terminal has colors
 syntax on
@@ -132,3 +137,27 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Ignore for ctrlp
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+
+
+
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Bi-directional find motion
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+" nmap s <Plug>(easymotion-s)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-s2)
+
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+
+" Keybindings
+inoremap <C-d> <Del>
