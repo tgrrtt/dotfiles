@@ -24,6 +24,8 @@ setopt CLOBBER
 unsetopt CORRECT
 
 # aliasing
+alias top="vtop --theme wizard"
+alias j="z"
 alias auxg="ps aux | grep -i"
 alias gcam="git commit -a -m"
 alias sbl="subl ."
@@ -34,12 +36,21 @@ alias kst="kill-session -t"
 alias chrome="open -a Google\ Chrome"
 alias lsa="ls -a"
 alias lsla="ls -la"
-alias gst="git status"
+alias extract="dtrx"
+alias gt="gittower ."
+alias gst="git status -sb"
+alias gstat="git status"
 alias glog="git hist"
-alias glogger="while true; do clear; git hist -5 | cat; sleep 2; done"
+alias gstats="while true; do clear; git status -sb; sleep 2; done"
+alias glogger="while true; do clear; git hist -5 | cat; sleep 3; done"
 
+#unset rm="rm -i"
+unalias rm
+# add z 
+. `brew --prefix`/etc/profile.d/z.sh
 # export
 export PATH=./node_modules/.bin:/usr/local/bin:$PATH
+
 
 # virtualenv
 # Disable virtualenv prompt info
