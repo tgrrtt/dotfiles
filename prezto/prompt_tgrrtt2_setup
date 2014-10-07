@@ -4,20 +4,16 @@
 # Authors:
 #   Brian Tse <briankftse@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-# Screenshots:
-#   http://i.imgur.com/zLZNK.png
-#
+#   Tyler Garrett
 
-
-function prompt_tgrrtt2_precmd {
+function prompt_tgrrtt_precmd {
   # Get Git repository information.
   if (( $+functions[git-info] )); then
     git-info
   fi
 }
 
-function prompt_tgrrtt2_setup {
+function prompt_tgrrtt_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
@@ -26,7 +22,7 @@ function prompt_tgrrtt2_setup {
   autoload -Uz add-zsh-hook
 
   # Add hook for calling vcs_info before each command.
-  add-zsh-hook precmd prompt_tgrrtt2_precmd
+  add-zsh-hook precmd prompt_tgrrtt_precmd
 
   # Set git-info parameters.
   zstyle ':prezto:module:git:info' verbose 'yes'
@@ -51,4 +47,4 @@ function prompt_tgrrtt2_setup {
   RPROMPT='${git_info[rprompt]}'
 }
 
-prompt_tgrrtt2_setup "$@"
+prompt_tgrrtt_setup "$@"

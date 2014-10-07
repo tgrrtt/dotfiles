@@ -1,44 +1,16 @@
 #
-# A one-liner theme that displays quick cwd info on the left, and vcs info on the right.
+# A one-liner theme that displays quick cwd info on the left, and git info on the right.
 #
 # Authors:
 #   Brian Tse <briankftse@gmail.com>
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-# Screenshots:
-#   http://i.imgur.com/zLZNK.png
-#
-
-function +vi-git-status() {
-  # Check for untracked files or updated submodules since vcs_info does not.
-  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    hook_com[unstaged]='%F{red}●%f'
-  fi
-}
-
-# Show remote ahead/behind
-function +vi-git-st() {
-    local ahead behind remote
-    local -a gitstatus
-
-    # Are we on a remote-tracking branch?
-    remote=${$(git rev-parse --verify ${hook_com[branch]}@{upstream} \
-        --symbolic-full-name --abbrev-ref 2>/dev/null)}
-
-    if [[ -n ${remote} ]] ; then
-        ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l)
-        (( $ahead )) && gitstatus+=( "%F{cyan}⇡%f" )
-
-        behind=$(git rev-list HEAD..${hook_com[branch]}@{upstream} 2>/dev/null | wc -l)
-        (( $behind )) && gitstatus+=( "%F{cyan}⇣%f" )
-
-        user_data[gitstatus]=${gitstatus}
-        hook_com[branch]="${hook_com[branch]} ${(j:/:)gitstatus}"
-    fi
-}
+#   Tyler Garrett
 
 function prompt_tgrrtt_precmd {
-  vcs_info
+  # Get Git repository information.
+  if (( $+functions[git-info] )); then
+    git-info
+  fi
 }
 
 function prompt_tgrrtt_setup {
@@ -48,24 +20,31 @@ function prompt_tgrrtt_setup {
 
   # Load required functions.
   autoload -Uz add-zsh-hook
-  autoload -Uz vcs_info
 
   # Add hook for calling vcs_info before each command.
   add-zsh-hook precmd prompt_tgrrtt_precmd
 
-  # Set vcs_info parameters.
-  zstyle ':vcs_info:*' enable bzr git hg svn
-  zstyle ':vcs_info:*' check-for-changes true
-  zstyle ':vcs_info:*' stagedstr '%F{green}●%f'
-  zstyle ':vcs_info:*' unstagedstr '%F{yellow}●%f'
-  zstyle ':vcs_info:*' formats '%c%u %b'
-  zstyle ':vcs_info:*' actionformats "%c%u %b|%F{cyan}%a%f"
-  zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b|%F{cyan}%r%f'
-  zstyle ':vcs_info:git*+set-message:*' hooks git-status git-st
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'yes'
+  zstyle ':prezto:module:git:info:action' format ':%F{yellow}%s%f'
+  zstyle ':prezto:module:git:info:added' format '%F{green}●%f'
+  zstyle ':prezto:module:git:info:ahead' format ' %F{cyan}⇡%f'
+  zstyle ':prezto:module:git:info:behind' format ' %F{cyan}⇣%f'
+  zstyle ':prezto:module:git:info:branch' format '%b'
+  zstyle ':prezto:module:git:info:commit' format ':%F{green}%.7c%f'
+  zstyle ':prezto:module:git:info:deleted' format '%F{red}●%f'
+  zstyle ':prezto:module:git:info:modified' format '%F{yellow}●%f'
+  zstyle ':prezto:module:git:info:position' format ':%F{red}%p%f'
+  zstyle ':prezto:module:git:info:renamed' format '%F{magenta}⇢%f'
+  zstyle ':prezto:module:git:info:stashed' format ' %F{cyan}✭%f'
+  zstyle ':prezto:module:git:info:unmerged' format ' %F{yellow}═%f'
+  zstyle ':prezto:module:git:info:untracked' format '%F{white}○%f'
+  zstyle ':prezto:module:git:info:keys' format \
+    'rprompt' '%a%m%d%u %r %b%s%U%S%A%B'
 
   # Define prompts.  %2~ ❯
   PROMPT='%2~ %(?.%F{white}.%F{red})❯%f '
-  RPROMPT='${vcs_info_msg_0_}'
+  RPROMPT='${git_info[rprompt]}'
 }
 
 prompt_tgrrtt_setup "$@"
