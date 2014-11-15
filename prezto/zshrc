@@ -24,32 +24,59 @@ setopt CLOBBER
 unsetopt CORRECT
 
 # aliasing
+alias sbl="subl ."
 alias top="vtop --theme wizard"
 alias j="z"
+alias v="vim"
+alias a="atom"
+alias whos="whois"
+alias harmony="node --harmony"
 alias auxg="ps aux | grep -i"
 alias gcam="git commit -a -m"
-alias sbl="subl ."
 alias gmnoff="git merge --no-ff"
 alias rmdir="rm -rf"
 alias rmrf="rm -rf"
 alias kst="kill-session -t"
 alias chrome="open -a Google\ Chrome"
+alias md="open -a marked"
 alias lsa="ls -a"
 alias lsla="ls -la"
 alias extract="dtrx"
 alias gt="gittower ."
+alias glulp="gulp"
+alias git="hub"
 alias gst="git status -sb"
+alias lolg="git log -1 | cowsay -f beavis.zen | lolcat"
 alias gstat="git status"
+alias gpreb="git pull --rebase"
+alias gpreq="hub pull-request"
+alias preq="hub pull-request"
 alias glog="git hist"
 alias gstats="while true; do clear; git status -sb; sleep 2; done"
 alias glogger="while true; do clear; git hist -5 | cat; sleep 3; done"
+alias hideFiles="defaults write com.apple.finder AppleShowAllFiles NO"
+alias showFiles="defaults write com.apple.finder AppleShowAllFiles YES"
+unalias rm
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+sublime() {
+  if [[ $1 ]]
+  then
+    subl $1
+  else
+    subl .
+  fi
+}
+
+alias s=sublime
 
 #unset rm="rm -i"
-unalias rm
+#unalias rm
 # add z 
 . `brew --prefix`/etc/profile.d/z.sh
 # export
 export PATH=./node_modules/.bin:/usr/local/bin:$PATH
+
 
 
 # virtualenv
@@ -57,3 +84,7 @@ export PATH=./node_modules/.bin:/usr/local/bin:$PATH
 export VIRTUAL_ENV_DISABLE_PROMPT='1'
 # activate 'default' virtualenv
 source /Users/tyler/.virtualenvs/default/bin/activate
+
+# added by travis gem
+[ -f /Users/tyler/.travis/travis.sh ] && source /Users/tyler/.travis/travis.sh
+

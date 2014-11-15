@@ -8,6 +8,11 @@ set nocompatible
 " No backup files
 set nobackup
 
+" tell vim to use system clipboard
+" must enable this when using tmux, also need reattatch-to-user-namespace for
+" tmux
+set clipboard=unnamed
+
 " No write backup
 set nowritebackup
 
@@ -111,22 +116,28 @@ let g:netrw_liststyle=3
 
 " Always highlight column 80 so it's easier to see where
 " cutoff appears on longer screens
-autocmd BufWinEnter * highlight ColorColumn ctermbg=grey
-set colorcolumn=80
+"autocmd BufWinEnter * highlight ColorColumn ctermbg=grey
+"set colorcolumn=80
 
 " Set .md files to markdown 
 " autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd Bufread,BufNewFile *.md set filetype=markdown
+
+" Set .sibilant files to scheme
+" autocmd Bufread,BufNewFile *.sibilant set filetype=scheme
+
 " }}}
 
 " Plugins {{{
 execute pathogen#infect()
 filetype plugin indent on " required by Pathogen Plugin Manager
 
+colorscheme badwolf
+
 " NERDTREE
 " open NerdTree if blank window
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Map Nerd tree to ctrl-n
 map <C-n> :NERDTreeToggle<CR>
@@ -161,5 +172,8 @@ au Syntax * RainbowParenthesesLoadBraces
 
 "JSHINT.VIM
 let g:JSHintHighlightErrorLine = 0
-colorscheme grb256
+" CtlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
 " }}}
